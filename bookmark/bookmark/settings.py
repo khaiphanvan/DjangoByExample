@@ -25,13 +25,18 @@ SECRET_KEY = 'qe-*e5f9(741om#@_0hfdh10ear!9+_ytvg#xze1)%ar-+f%vm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mysite.com']
 LOGIN_REDIRECT_URL = reverse_lazy('dashboard')
 LOGIN_URL = reverse_lazy('login')
 LOGOUT_URL = reverse_lazy('logout')
 
 #Email
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'tieuphongabc123@gmail.com'
+EMAIL_HOST_PASSWORD = 'tieuphong@123'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
@@ -44,8 +49,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'account',
     'django.contrib.admin',
+    'sslserver',
+    'social_django',
+    'account',
 ]
 
 MIDDLEWARE = [
@@ -56,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'bookmark.urls'
@@ -72,6 +80,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -109,7 +120,24 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+SOCIAL_AUTH_FACEBOOK_KEY = '269417100322018' # Facebook App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = 'c20b4a08f4201166ad8a7588e1c1e5cc' # Facebook App Secret
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '906645338575-def2qn1m7m417f4lur4qe0rgbpe8mf4q.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'Oj-xrSRaOSk8lTi2RY5gY3X0'
+
+AUTHENTICATION_BACKENDS = (
+    'account.authentication.EmailAuthBackend',
+    'social.backends.facebook.FacebookOAuth2',
+    'social_core.backends.open_id.OpenIdAuth',
+    'social.backends.google.GoogleOpenId',
+    'social.backends.google.GoogleOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
