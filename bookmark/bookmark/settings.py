@@ -123,17 +123,16 @@ AUTH_PASSWORD_VALIDATORS = [
 SOCIAL_AUTH_FACEBOOK_KEY = '269417100322018' # Facebook App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = 'c20b4a08f4201166ad8a7588e1c1e5cc' # Facebook App Secret
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
-SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
+# SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '906645338575-def2qn1m7m417f4lur4qe0rgbpe8mf4q.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'Oj-xrSRaOSk8lTi2RY5gY3X0'
 
 AUTHENTICATION_BACKENDS = (
     'account.authentication.EmailAuthBackend',
-    'social.backends.facebook.FacebookOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
     'social_core.backends.open_id.OpenIdAuth',
-    'social.backends.google.GoogleOpenId',
-    'social.backends.google.GoogleOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.twitter.TwitterOAuth',
 
     'django.contrib.auth.backends.ModelBackend',
