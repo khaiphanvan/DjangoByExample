@@ -25,7 +25,7 @@ SECRET_KEY = 'qe-*e5f9(741om#@_0hfdh10ear!9+_ytvg#xze1)%ar-+f%vm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['mysite.com']
+ALLOWED_HOSTS = ['mysite.com','127.0.0.1']
 LOGIN_REDIRECT_URL = reverse_lazy('dashboard')
 LOGIN_URL = reverse_lazy('login')
 LOGOUT_URL = reverse_lazy('logout')
@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'sslserver',
     'social_django',
     'account',
+    'images',
 ]
 
 MIDDLEWARE = [
