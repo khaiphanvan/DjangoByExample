@@ -10,4 +10,5 @@ urlpatterns = [
     # path('', views.user_login, name='index'),
     path('create/', views.image_create, name='create'),
     path('detail/<int:id>/<slug:tilte>', views.image_detail, name='detail'),
+    path('like/', views.image_like, name='like'),
 ]

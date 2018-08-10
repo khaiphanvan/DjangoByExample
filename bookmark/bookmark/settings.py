@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'sslserver',
     'social_django',
+    'sorl.thumbnail',
     'account',
     'images',
 ]
