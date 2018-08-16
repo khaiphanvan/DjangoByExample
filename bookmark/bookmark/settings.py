@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-from django.urls import reverse_lazy
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -25,37 +25,28 @@ SECRET_KEY = 'qe-*e5f9(741om#@_0hfdh10ear!9+_ytvg#xze1)%ar-+f%vm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['mysite.com','127.0.0.1']
-LOGIN_REDIRECT_URL = reverse_lazy('dashboard')
-LOGIN_URL = reverse_lazy('login')
-LOGOUT_URL = reverse_lazy('logout')
+ALLOWED_HOSTS = [
+    'mysite.com',
+    'localhost',
+    '127.0.0.1',
+    '3f6ad53c.ngrok.io'
+]
 
-#Email
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'tieuphongabc123@gmail.com'
-EMAIL_HOST_PASSWORD = ''
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Application definition
 
 INSTALLED_APPS = [
+    'account.apps.AccountConfig',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admin',
-    'sslserver',
     'social_django',
+    'images.apps.ImagesConfig',
     'sorl.thumbnail',
-    'account',
-    'images',
-    'actions',
+    'actions.apps.ActionsConfig',
 ]
 
 MIDDLEWARE = [
@@ -123,23 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-SOCIAL_AUTH_FACEBOOK_KEY = '269417100322018' # Facebook App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = 'c20b4a08f4201166ad8a7588e1c1e5cc' # Facebook App Secret
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
-# SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '906645338575-def2qn1m7m417f4lur4qe0rgbpe8mf4q.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'Oj-xrSRaOSk8lTi2RY5gY3X0'
-
-AUTHENTICATION_BACKENDS = (
-    'account.authentication.EmailAuthBackend',
-    'social_core.backends.facebook.FacebookOAuth2',
-    'social_core.backends.open_id.OpenIdAuth',
-    'social_core.backends.google.GoogleOAuth2',
-    'social_core.backends.twitter.TwitterOAuth',
-
-    'django.contrib.auth.backends.ModelBackend',
-)
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
@@ -159,6 +134,54 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+
+
+#Email
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'tieuphongabc123@gmail.com'
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'account.authentication.EmailAuthBackend',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.open_id.OpenIdAuth',
+    'social_core.backends.google.GoogleOAuth2',
+]
+
+# social auth settings
+SOCIAL_AUTH_FACEBOOK_KEY = '269417100322018' # Facebook App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = 'c20b4a08f4201166ad8a7588e1c1e5cc' # Facebook App Secret
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
+# SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
+SOCIAL_AUTH_TWITTER_KEY = '' # Twitter Consumer Key
+SOCIAL_AUTH_TWITTER_SECRET = '' # Twitter Consumer Secret
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '906645338575-def2qn1m7m417f4lur4qe0rgbpe8mf4q.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'Oj-xrSRaOSk8lTi2RY5gY3X0'
+
+
+from django.urls import reverse_lazy
+
 ABSOLUTE_URL_OVERRIDES = {
     'auth.user': lambda u: reverse_lazy('user_detail',args=[u.username])
 }
+
+
+# Redis settings
+REDIS_HOST = '127.0.0.1'
+REDIS_PORT = 6379
+REDIS_DB = 0
