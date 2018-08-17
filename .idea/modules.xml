@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/DjangoByExample.iml" filepath="$PROJECT_DIR$/.idea/DjangoByExample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/DjangoByExample.iml" filepath="$PROJECT_DIR$/.idea/DjangoByExample.iml" />
     </modules>
   </component>
 </project>
